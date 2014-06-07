@@ -1,0 +1,25 @@
+/* line 13, index.scss */
+.notification {
+  padding: 5px;
+  margin: 5px;
+  background: #ffebad;
+  border: #ad8300 1px solid;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* line 16, index.scss */
+.error {
+  padding: 5px;
+  margin: 5px;
+  background: red;
+  border: black 1px solid;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}

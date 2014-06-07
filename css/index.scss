@@ -1,0 +1,18 @@
+@import "compass";
+
+$notification:#FFEBAD;
+$error:#FF0000;
+
+@mixin notif($color){
+  padding: 5px;margin: 5px;
+  background: $color;
+  border: darken($color,50%) 1px solid;
+  @include border-radius(10px); 
+}
+
+.notification{
+  @include notif($notification); 
+}
+.error{
+  @include notif($error); 
+}
