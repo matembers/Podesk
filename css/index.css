@@ -107,7 +107,7 @@ input, textarea {
 \*------------------------------------*/
 body {
   color: #333;
-  font-family: "Ubuntu";
+  font-family: Arial;
   font-size: 16px;
   background-color: #FFFFFF; }
 
@@ -211,37 +211,30 @@ input.submit, .btn {
   position: absolute;
   top: 60px;
   right: 0;
-  bottom: 60px;
+  bottom: 0;
   left: 0; }
 
-.nav {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  background-color: #4f597b;
-  overflow: hidden;
-  *zoom: 1; }
-  .nav a {
-    display: block;
-    width: 50%;
+/*
+.nav{
+
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
     height: 60px;
     line-height: 60px;
-    float: left;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s; }
-  .nav a:first-child {
-    border-right: 1px solid #1f253d; }
-  .nav .active {
-    border-top: 3px solid #11a7ab; }
-  .nav i {
-    margin-top: 15px; }
-
+    text-align: center;
+    background-color: #4f597b;
+    @include clearfix;
+    a{
+        display: block;
+        width: 50%;
+        height: 60px; line-height: 60px;
+        float: left;
+        @include transition-duration;
+    }
+    a:first-child{ border-right: 1px solid #1f253d;}
+    .active{border-top: 3px solid #11a7ab;}
+    i{margin-top: 15px;}
+}*/
 .pan, .loader {
   position: absolute;
   top: 0;

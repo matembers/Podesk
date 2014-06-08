@@ -18,7 +18,7 @@ input, textarea{ border: none; -webkit-appearance: none; @include border-radius(
 \*------------------------------------*/
 body{
     color: #333;
-    font-family: "Ubuntu";
+    font-family: Arial;
     font-size: 16px;
     background-color: #FFFFFF;
 }
@@ -89,9 +89,9 @@ input.submit, .btn{
 
 .view{
     position: absolute;
-    top: 60px; right: 0; bottom: 60px; left: 0;
+    top: 60px; right: 0; bottom: 0; left: 0;
 }
-
+/*
 .nav{
 
     position: absolute;
@@ -111,7 +111,7 @@ input.submit, .btn{
     a:first-child{ border-right: 1px solid #1f253d;}
     .active{border-top: 3px solid #11a7ab;}
     i{margin-top: 15px;}
-}
+}*/
 
 .pan{
     position: absolute;
