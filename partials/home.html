@@ -4,7 +4,7 @@
     <a class="back" ng-hide="panel==0" ng-click="panel=0"></a>
 
     <section
-        class="panel panel-padding"
+        class="pan pan-padding"
         ng-class="{center:panel==0, left:panel>0}">
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, quia, beatae, consequatur.</p>
@@ -22,7 +22,7 @@
     </section>
 
     <section
-        class="panel right"
+        class="pan right"
         ng-class="{center:panel==1, right:panel<1}">
 
         <div class="row-title">
@@ -34,7 +34,8 @@
                 <strong>{{t.dt*1000 | date:'EEE'}}</strong>
                 {{t.dt*1000 | date:'dd/MM'}}
             </div>
-            <i class="icon-{{t.weather.0.main.toLowerCase()}}"></i>
+            <i class="small icon-{{t.weather.0.main.toLowerCase()}}"></i>
+            <i class="big icon-{{t.weather.0.main.toLowerCase()}}-big"></i>
         </div>
     </section>
 
