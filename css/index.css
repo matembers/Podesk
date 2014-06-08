@@ -2,8 +2,8 @@
 .notification {
   padding: 5px;
   margin: 5px;
-  background: #ffebad;
-  border: #ad8300 1px solid;
+  background: black;
+  border: black 1px solid;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
