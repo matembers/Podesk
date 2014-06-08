@@ -1,0 +1,19 @@
+<section>
+
+    <div class="loader" ng-show="loader"></div>
+
+    <section
+        class="pan pan-padding">
+            <h1>{{nom}}</h1>
+
+            <div class="row" ng-repeat="episode in episodes | limitTo:10">
+                {{episode.title}} <br>
+                <audio src='{{episode.enclosure["@attributes"].url}}' controls></audio>
+            </div>
+
+
+    </section>
+
+
+
+</section>

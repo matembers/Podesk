@@ -1,6 +1,7 @@
-function WeatherCtrl($scope, $http, geolocationService){
+function WeatherCtrl($scope, $http, $routeParams, geolocationService){
 	$scope.panel = 0;
 
+    
 	$scope.search = function(){
 		if($scope.city){
 			var url = 'http://api.openweathermap.org/data/2.5/forecast/daily?q='+$scope.city+'&mode=json&units=metric&cnt=10';
