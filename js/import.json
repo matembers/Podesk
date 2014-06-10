@@ -1,11 +1,16 @@
-[
-    {"nom": "Season1",
-     "cover": "http://www.geekinc.fr/season1/season1cover.png",
-     "feed": "http://feeds.feedburner.com/Season1Podcast"},
-    {"nom": "Donc Voila Quoi podcast",
-     "cover": "http://assets.libsyn.com/content/5484019.jpg",
-     "feed": "http://doncvoilaquoi.libsyn.com/rss"},
-    {"nom": "RadioNavo",
-     "cover": "http://i1.sndcdn.com/avatars-000070315268-bvezv0-original.jpg?30a2558",
-     "feed": "http://feeds.soundcloud.com/users/soundcloud:users:6464795/sounds.rss"}
-]
+
+    { 
+
+    	"Season1" : {
+			"cover": "http://www.geekinc.fr/season1/season1cover.png",
+			"feed": "http://feeds.feedburner.com/Season1Podcast"
+			},
+		"Donc Voila Quoi podcast" : {
+			"cover": "http://assets.libsyn.com/content/5484019.jpg",
+	     	"feed": "http://doncvoilaquoi.libsyn.com/rss"
+			},
+		"RadioNavo" : {
+			"cover": "http://i1.sndcdn.com/avatars-000070315268-bvezv0-original.jpg?30a2558",
+	     	"feed": "http://feeds.soundcloud.com/users/soundcloud:users:6464795/sounds.rss"
+			}
+	}

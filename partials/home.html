@@ -5,10 +5,10 @@
     <section
         class="pan pan-padding">
         
-        <div class="row" ng-repeat="podcast in podcasts">
-            <a href="#/{{$index}}">
-            	<img src="{{podcast.cover}}" class="pull-left" alt="">
-            	{{podcast.nom}}</a>
+        <div class="row" ng-repeat="podcast in notSorted(podcasts) " ng-init="lessCompletDatas = podcasts[podcast]">
+            <a href="#/{{podcast}}">
+            	<img src="{{lessCompletDatas.cover}}" class="pull-left" alt="">
+            	{{podcast}}</a>
         </div>
 
         

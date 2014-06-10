@@ -5,12 +5,12 @@
     <section
         class="pan pan-padding">
             <h1>{{nom}}</h1>
+            <div class="row" ng-repeat="episode in episodes | limitTo : numLimit"  id="podcast{{$index}}">
+                <p ng-click="playPod($index);">{{episode.title}}</p>
+                <audio src='{{episode.enclosure["@attributes"].url}}' preload='auto' jq-table controls ></audio>
 
-            <div class="row" ng-repeat="episode in episodes | limitTo:10">
-                {{episode.title}} <br>
-                <audio src='{{episode.enclosure["@attributes"].url}}' controls></audio>
             </div>
-
+            <a href="" ng-click="numLimit = numLimitMax">voir tout</a>
 
     </section>
 
