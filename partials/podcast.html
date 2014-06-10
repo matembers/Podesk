@@ -7,7 +7,7 @@
             <h1>{{nom}}</h1>
             <div class="row" ng-repeat="episode in episodes | limitTo : numLimit"  id="podcast{{$index}}">
                 <p ng-click="playPod($index);">{{episode.title}}</p>
-                <audio src='{{episode.enclosure["@attributes"].url}}' preload='auto' jq-table controls ></audio>
+                <audio src='{{episode.url}}' ng-audio controls ></audio>
 
             </div>
             <a href="" ng-click="numLimit = numLimitMax">voir tout</a>

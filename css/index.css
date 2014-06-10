@@ -126,6 +126,12 @@ p {
   overflow: hidden;
   *zoom: 1; }
 
+.mejs-container .mejs-controls .mejs-button button:focus {
+  outline: 0 none !important; }
+
+.mejs-container .mejs-controls .mejs-time-rail .mejs-time-loaded {
+  background: #444; }
+
 input.text {
   display: block;
   width: 100%;

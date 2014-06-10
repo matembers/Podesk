@@ -4,13 +4,13 @@ var app = angular.module('app', [
 ]);
 
 
-app.directive("jqTable", function () {
+app.directive("ngAudio", function () {
     return function (scope, element, attrs) {
-        scope.$watch("episode.enclosure['@attributes'].url", function (value) {
+        scope.$watch("episode.url", function (value) {
             var val = value || null;            
             if (val){
-              console.log(value);
-                setTimeout( function() {/*element.audioPlayer();*/},2000 );              
+                console.log(value);
+                element.mediaelementplayer({audioWidth: 700});              
             }
                 
         });
@@ -40,9 +40,9 @@ app.config(['$routeProvider', '$sceDelegateProvider',
             otherwise({
                 redirectTo: '/home'
             });
-        $sceDelegateProvider.resourceUrlWhitelist([
+        /*$sceDelegateProvider.resourceUrlWhitelist([
             'self',
-            'http://feeds.soundcloud.com/stream/**']);
+            'http://feeds.soundcloud.com/stream/**']);*/
 }]);
 
 
@@ -75,9 +75,9 @@ appControllers.controller('PodcastCtrl', ['$scope', '$http', '$sce','$rootScope'
 
             var podcast = data;
             $scope.episodes = podcast.channel.item;
-            /*angular.forEach($scope.episodes, function(value, key) {
-               $scope.episodes[key].url = $scope.episodes[key].enclosure["@attributes"].url;
-             });*/
+            angular.forEach($scope.episodes, function(value, key) {
+               $scope.episodes[key].url = $sce.trustAsResourceUrl($scope.episodes[key].enclosure["@attributes"].url);
+             });
             //console.log($scope.episodes);
 
             $scope.numLimitMax  = $scope.episodes.length;
@@ -87,7 +87,8 @@ appControllers.controller('PodcastCtrl', ['$scope', '$http', '$sce','$rootScope'
 
         $scope.playPod = function(e){
             console.log('podcast'+e);
-            $('#podcast'+e+' audio').audioPlayer();
+            //$('#podcast'+e+' audio').audioPlayer();
+            $('#podcast'+e+' audio').mediaelementplayer({audioWidth: 400});
             /*$elem = $($scope);
             $elem.audioPlayer();*/
         }

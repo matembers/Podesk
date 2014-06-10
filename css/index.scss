@@ -16,7 +16,7 @@ input, textarea{ border: none; -webkit-appearance: none; @include border-radius(
 /*------------------------------------*\
     $GENERIC
 \*------------------------------------*/
-body{
+body{    
     color: #333;
     font-family: Arial;
     font-size: 16px;
@@ -25,6 +25,14 @@ body{
 i{display: inline-block;}
 h1{font-size: 28px; text-align: center; color: #333; font-weight: bold; margin: 45px 0; }
 p{margin: 1em 0px; @include clearfix;}
+
+.mejs-container .mejs-controls .mejs-button button:focus {
+    outline: 0 none !important;
+}
+.mejs-container .mejs-controls .mejs-time-rail .mejs-time-loaded{
+    background: #444;
+}
+
 input.text{
     display: block;
     width: 100%;
@@ -85,6 +93,7 @@ input.submit, .btn{
     text-transform: uppercase;
     text-align: center;
     background-color: #343434;
+    
 }
 
 .view{
