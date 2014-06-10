@@ -6,7 +6,7 @@
         class="pan pan-padding podcast">
             <div class="container">
                 <h1>{{nom}}</h1>
-                <img src="{{cover}}" class="pull-left" />
+                <img src="podcasts/img/{{cover}}" class="pull-left" />
                 <div class="episodes">
                     <div class="row" ng-repeat="episode in episodes | limitTo : numLimit"  id="podcast{{$index}}">
                         <h3>{{episode.title}}</h3>

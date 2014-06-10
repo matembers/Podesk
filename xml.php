@@ -8,31 +8,25 @@
 		$podcastObj = json_decode($podcast);
 
 
-		$podcasts = file_get_contents('js/import.json');
-		$podcastsObj = json_decode($podcasts);
 
-		$lastPub = $podcastsObj -> $_REQUEST['nom'] -> lastPub;	
+		$lastPub = $_REQUEST['nom'];	
 		$newPub = strtotime($podcastObj -> channel -> pubDate);	
 
-		if($newPub > $lastPub){
+		/*if($newPub > $lastPub){
+			$podcasts = file_get_contents('js/import.json');
+			$podcastsObj = json_decode($podcasts);			
 			$podcastsObj -> $_REQUEST['nom'] -> lastPub = strtotime($newPub);
 			$podcastsObj = json_encode($podcastsObj);
-			$podcasts = file_put_contents('js/import.json', $podcastsObj);
+			file_put_contents('js/import.json', $podcastsObj);
 
-			$podcast = json_encode($podcast);
+			$podcastObj = json_encode($podcastObj);
 
-			file_put_contents('podcasts/'.$_REQUEST['nom'].'.json', $podcast);
-		}	
+			file_put_contents('podcasts/'.$_REQUEST['nom'].'.json', $podcastObj);
+		}*/	
 
-		if (file_exists('podcasts/'.$_REQUEST['nom'].'.json')) {
-			$podcast = json_encode($podcast);
-			$podcast =  file_get_contents('podcasts/'.$_REQUEST['nom'].'.json');
-			echo $podcast;
-		}else{
-			$podcast = json_encode($podcast);
-			file_put_contents('podcasts/'.$_REQUEST['nom'].'.json', $podcast);		
-			echo $podcast;
-		}
+		$finalpodcast = file_get_contents('podcasts/'.$_REQUEST['nom'].'.json');
+		echo $finalpodcast;
+
 		
 	}else{
 		die();

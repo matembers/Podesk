@@ -70,7 +70,7 @@ appControllers.controller('PodcastCtrl', ['$scope', '$http', '$sce','$rootScope'
 
         $scope.nom = $rootScope.podcasts[$routeParams.idPodcast].name;
         $scope.cover = $rootScope.podcasts[$routeParams.idPodcast].cover;
-        $scope.feed = "xml.php?nom="+$routeParams.idPodcast+"&url="+$rootScope.podcasts[$routeParams.idPodcast].feed;
+        $scope.feed = "xml.php?nom="+$routeParams.idPodcast+"&url="+$rootScope.podcasts[$routeParams.idPodcast].feed+"&lastPub="+$rootScope.podcasts[$routeParams.idPodcast].lastPub;
 
         $http.get($scope.feed).success(function(data){
 
