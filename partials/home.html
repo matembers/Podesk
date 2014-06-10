@@ -3,12 +3,14 @@
     <div class="loader" ng-show="loader"></div>
 
     <section
-        class="pan pan-padding">
+        class="pan pan-padding podcasts">
         
-        <div class="row" ng-repeat="podcast in notSorted(podcasts) " ng-init="lessCompletDatas = podcasts[podcast]">
-            <a href="#/{{podcast}}">
-            	<img src="{{lessCompletDatas.cover}}" class="pull-left" alt="">
-            	{{podcast}}</a>
+        <div class="container">
+        	<div class="row" ng-repeat="(alias, podcast) in podcasts | orderBy:lastPub">
+        	    <a href="#/{{alias}}">
+        	    	<img src="{{ podcast.cover }}" class="pull-left" alt="">
+        	    	{{podcast.name}}</a>
+        	</div>
         </div>
 
         

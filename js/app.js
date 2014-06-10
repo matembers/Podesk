@@ -9,7 +9,7 @@ app.directive("ngAudio", function () {
         scope.$watch("episode.url", function (value) {
             var val = value || null;            
             if (val){
-                console.log(value);
+                //console.log(value);
                 element.mediaelementplayer({audioWidth: 700});              
             }
                 
@@ -68,15 +68,20 @@ appControllers.controller('PodcastCtrl', ['$scope', '$http', '$sce','$rootScope'
         $scope.loader  = false;
         $scope.numLimit  = 5;        
 
-        $scope.nom = $routeParams.idPodcast;
-        $scope.feed = "xml.php?url="+$rootScope.podcasts[$routeParams.idPodcast].feed;
+        $scope.nom = $rootScope.podcasts[$routeParams.idPodcast].name;
+        $scope.cover = $rootScope.podcasts[$routeParams.idPodcast].cover;
+        $scope.feed = "xml.php?nom="+$routeParams.idPodcast+"&url="+$rootScope.podcasts[$routeParams.idPodcast].feed;
 
         $http.get($scope.feed).success(function(data){
 
             var podcast = data;
+            console.log(data);
             $scope.episodes = podcast.channel.item;
             angular.forEach($scope.episodes, function(value, key) {
                $scope.episodes[key].url = $sce.trustAsResourceUrl($scope.episodes[key].enclosure["@attributes"].url);
+                date = new Date($scope.episodes[key].pubDate);
+                dateString = ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth()+1)).slice(-2) + '/' + date.getFullYear();
+               $scope.episodes[key].dateFr = dateString;
              });
             //console.log($scope.episodes);
 
