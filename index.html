@@ -12,12 +12,17 @@
         <script src="js/angular.min.js"></script>
         <script src="js/angular-route.min.js"></script>
         <script src="js/app.js"></script>
-        <title>Podesk</title>
+        <title>{{title}}</title>
     </head>
     <body>
         <header class="header">
             Podesk
         </header>
+        <div class="player">
+            <div class="container">
+                <audio src='{{audioUrl}}' id="audioplayer" ng-audio controls ></audio>
+            </div>
+        </div>
         <section class="view" ng-view>
             
 

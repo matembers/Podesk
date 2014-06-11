@@ -70,10 +70,6 @@ i {
 h3 {
   margin: 0; }
 
-p {
-  overflow: hidden;
-  *zoom: 1; }
-
 .mejs-container .mejs-controls .mejs-button button:focus {
   outline: 0 none !important; }
 
@@ -154,16 +150,30 @@ input.submit, .btn {
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
-  line-height: 60px;
+  height: 40px;
+  line-height: 40px;
   color: #FFF;
   text-transform: uppercase;
   text-align: center;
-  background-color: #343434; }
+  font-weight: bold;
+  background-color: #d09946; }
+
+.player {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  line-height: 60px;
+  padding: 15px 0;
+  color: #FFF;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #DDD; }
 
 .view {
   position: absolute;
-  top: 60px;
+  top: 100px;
   right: 0;
   bottom: 0;
   left: 0; }
@@ -202,9 +212,6 @@ input.submit, .btn {
   -moz-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s; }
-
-.pan-padding {
-  padding: 0 25px; }
 
 .left {
   -webkit-transform: translate3D(-100%, 0, 0);
@@ -254,9 +261,6 @@ input.submit, .btn {
   margin: 1px 0;
   padding: 10px 0;
   position: relative; }
-  .row img {
-    width: 50px;
-    margin: 0 10px 0 0; }
 
 .row_active {
   margin: 0;
@@ -282,6 +286,15 @@ input.submit, .btn {
     display: none; }
   .row_active i.big {
     display: block; }
+
+.podcasts .wrapper {
+  margin-bottom: 10px; }
+  .podcasts .wrapper a {
+    color: #333; }
+  .podcasts .wrapper img {
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0 0 3px 0; }
 
 .podcast img {
   width: 150px;

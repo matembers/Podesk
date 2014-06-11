@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<opml version="1.0">
+  <head>
+    <title>Pocket Casts Feeds</title>
+  </head>
+  <body>
+    <outline text="feeds">
+      <outline type="rss" text="Studio404" xmlUrl="http://fibretigre.com/divers/Studio404_1.xml" />
+      
+    </outline>
+  </body>
+</opml>

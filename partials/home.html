@@ -6,10 +6,13 @@
         class="pan pan-padding podcasts">
         
         <div class="container">
-        	<div class="row" ng-repeat="(alias, podcast) in podcasts | orderBy:lastPub">
-        	    <a href="#/{{alias}}">
-        	    	<img src="podcasts/img/{{ podcast.cover }}" class="pull-left" alt="">
-        	    	{{podcast.name}}</a>
+        	<div class="row">
+        	    <div class="col-sm-2 wrapper" ng-repeat="(alias, podcast) in podcasts | orderBy:lastPub">
+                    <a href="#/{{alias}}">
+                        <img src="podcasts/{{ podcast.cover }}" class="pull-left" alt="">
+                        <p>{{podcast.name}}</p>
+                    </a>
+                </div>
         	</div>
         </div>
 

@@ -24,7 +24,6 @@ body{
 i{display: inline-block;}
 h1{  }
 h3{ margin: 0; }
-p{@include clearfix;}
 
 .mejs-container .mejs-controls .mejs-button button:focus {
     outline: 0 none !important;
@@ -88,17 +87,29 @@ input.submit, .btn{
 .header{
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 60px; line-height: 60px;
+    height: 40px; line-height: 40px;
     color: #FFF;
     text-transform: uppercase;
     text-align: center;
-    background-color: #343434;
+    font-weight: bold;
+    background-color: #d09946;
+    
+}
+.player{
+    position: absolute;
+    top: 40px; left: 0; right: 0;
+    height: 60px; line-height: 60px;
+    padding: 15px 0;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #DDD;
     
 }
 
 .view{
     position: absolute;
-    top: 60px; right: 0; bottom: 0; left: 0;
+    top: 100px; right: 0; bottom: 0; left: 0;
 }
 /*
 .nav{
@@ -130,7 +141,6 @@ input.submit, .btn{
     -webkit-overflow-scrolling:touch;
     @include transition-duration(.5s);
 }
-.pan-padding{ padding:0 25px; }
 
 .left{@include transform(translate3D(-100%, 0, 0));}
 .center{@include transform(translate3D(0, 0, 0));}
@@ -157,10 +167,7 @@ input.submit, .btn{
     margin: 1px 0;
     padding: 10px 0;
     position: relative;
-    img{
-       width: 50px;
-       margin: 0 10px 0 0;
-    }
+    
 }
 .row_active{
     margin: 0;
@@ -178,6 +185,22 @@ input.submit, .btn{
     i.big{display: block;}
 }
 
+
+.podcasts{
+
+    .wrapper{
+        margin-bottom: 10px;
+        a{
+            color: #333;
+        }
+        img{
+           min-width: 100%;
+           max-width: 100%;
+           margin: 0 0 3px 0;
+        }
+    }
+
+}
 
 .podcast{
 

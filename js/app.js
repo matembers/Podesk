@@ -6,20 +6,23 @@ var app = angular.module('app', [
 
 app.directive("ngAudio", function () {
     return function (scope, element, attrs) {
-        scope.$watch("episode.url", function (value) {
+        scope.$watch("audioUrl", function (value) {
             var val = value || null;            
-            if (val){
-                //console.log(value);
-                element.mediaelementplayer({audioWidth: 700});              
+            if (val){ 
+                var player = new MediaElementPlayer(element,{audioWidth: 1140});   
+                //player.play();         
             }
                 
         });
     };
 });
 
-app.run([ '$http', '$rootScope', 
-    function($http, $rootScope){
-        $http.get("js/import.json").success(function(response){
+app.run([ '$http', '$rootScope', '$sce', 
+    function($http, $rootScope, $sce){
+        
+        $rootScope.title = 'Podesk';
+        $rootScope.audioUrl = $sce.trustAsResourceUrl('http://feeds.soundcloud.com/stream/153521892-radionavo-damien-maric-et-ses-invites-parlent-de-leurs-choix-les-invites-de-mon-invite-sont-mes-invites.mp3');
+        $http.get("podcasts.json").success(function(response){
             $rootScope.podcasts = response;
         }).error(function(){
 
@@ -53,6 +56,8 @@ appControllers.controller('HomeCtrl', ['$scope', '$http', '$rootScope',
     function ($scope, $http, $rootScope) {
         $scope.panel = 0;
         $scope.loader  = false;
+
+        $rootScope.title = 'Podesk';
         $scope.notSorted = function(obj){
             if (!obj) {
                 return [];
@@ -66,23 +71,27 @@ appControllers.controller('HomeCtrl', ['$scope', '$http', '$rootScope',
 appControllers.controller('PodcastCtrl', ['$scope', '$http', '$sce','$rootScope', '$routeParams',
     function($scope, $http, $sce, $rootScope, $routeParams) {
         $scope.loader  = false;
-        $scope.numLimit  = 5;        
+        $scope.numLimit  = 5; 
+
+        $rootScope.title = $rootScope.podcasts[$routeParams.idPodcast].name+' - '+$rootScope.title;
 
         $scope.nom = $rootScope.podcasts[$routeParams.idPodcast].name;
         $scope.cover = $rootScope.podcasts[$routeParams.idPodcast].cover;
-        $scope.feed = "xml.php?nom="+$routeParams.idPodcast+"&url="+$rootScope.podcasts[$routeParams.idPodcast].feed+"&lastPub="+$rootScope.podcasts[$routeParams.idPodcast].lastPub;
+        $scope.feed = "podcasts/"+$routeParams.idPodcast+".json";
 
         $http.get($scope.feed).success(function(data){
 
-            var podcast = data;
-            console.log(data);
-            $scope.episodes = podcast.channel.item;
-            angular.forEach($scope.episodes, function(value, key) {
-               $scope.episodes[key].url = $sce.trustAsResourceUrl($scope.episodes[key].enclosure["@attributes"].url);
-                date = new Date($scope.episodes[key].pubDate);
+            $scope.description = data.channel.description;
+            var podcast = data.channel.item;
+            //console.log(data);
+            angular.forEach(podcast, function(value, key) {
+               podcast[key].url = $sce.trustAsResourceUrl(podcast[key].enclosure["@attributes"].url);
+                date = new Date(podcast[key].pubDate);
+               podcast[key].dateTs = date.getTime();
                 dateString = ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth()+1)).slice(-2) + '/' + date.getFullYear();
-               $scope.episodes[key].dateFr = dateString;
+               podcast[key].dateFr = dateString;
              });
+            $scope.episodes = podcast;
             //console.log($scope.episodes);
 
             $scope.numLimitMax  = $scope.episodes.length;
@@ -90,12 +99,11 @@ appControllers.controller('PodcastCtrl', ['$scope', '$http', '$sce','$rootScope'
 
         });
 
-        $scope.playPod = function(e){
-            console.log('podcast'+e);
-            //$('#podcast'+e+' audio').audioPlayer();
-            $('#podcast'+e+' audio').mediaelementplayer({audioWidth: 400});
-            /*$elem = $($scope);
-            $elem.audioPlayer();*/
+        $scope.playPod = function(episode){
+            //console.log('url : '+episode.url);
+            $rootScope.audioUrl = episode.url;
         }
     }
 ]);
+
+
