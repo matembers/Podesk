@@ -1,5 +1,6 @@
 var app = angular.module('app', [
   'ngRoute',
+  'ngSanitize',
   'appControllers'
 ]);
 
@@ -9,7 +10,14 @@ app.directive("ngAudio", function () {
         scope.$watch("audioUrl", function (value) {
             var val = value || null;            
             if (val){ 
-                var player = new MediaElementPlayer(element,{audioWidth: 1140});   
+                var player = new MediaElementPlayer(element,{
+                    audioWidth: 1140,
+                    success: function (mediaElement) { 
+                        mediaElement.addEventListener('loadeddata', function(e) {             
+                            mediaElement.play();  
+                        }, false);                    
+                    }
+                });   
                 //player.play();         
             }
                 
@@ -58,13 +66,7 @@ appControllers.controller('HomeCtrl', ['$scope', '$http', '$rootScope',
         $scope.loader  = false;
 
         $rootScope.title = 'Podesk';
-        $scope.notSorted = function(obj){
-            if (!obj) {
-                return [];
-            }
-            return Object.keys(obj);
-        }
-
+        
     }
 ]);
 

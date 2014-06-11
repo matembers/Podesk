@@ -6,12 +6,15 @@
         class="pan pan-padding podcast">
             <div class="container">
                 <h1>{{nom}}</h1>
-                <p>{{description}}</p>
+                <p ng-bind-html="description">
+                    
+                </p>
                 <img src="podcasts/{{cover}}" class="pull-left" />
                 <div class="episodes">
                     <div class="row" ng-repeat="episode in episodes | orderBy:'-dateTs' | limitTo : numLimit"  id="podcast{{$index}}">
                         <h3>{{episode.title}}</h3>
                         <p>{{episode.dateFr}}</p>
+                        <div ng-bind-html="episode.description"></div>
                         <p>
                             <a href='' ng-click="playPod(episode)">Play</a>
                         </p>
