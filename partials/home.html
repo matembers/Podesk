@@ -7,10 +7,9 @@
         
         <div class="container">
         	<div class="row">
-        	    <div class="col-sm-2 wrapper" ng-repeat="(alias, podcast) in podcasts | orderBy:lastPub">
-                    <a href="#/{{alias}}">
+        	    <div class="col-sm-2 wrapper" ng-repeat="podcast in podcasts | orderBy:'-lastPub'">
+                    <a href="#/{{podcast.alias}}">
                         <img src="podcasts/{{ podcast.cover }}" class="pull-left" alt="">
-                        <p>{{podcast.name}}</p>
                     </a>
                 </div>
         	</div>

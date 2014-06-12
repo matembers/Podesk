@@ -14,7 +14,7 @@ app.directive("ngAudio", function () {
                     audioWidth: 1140,
                     success: function (mediaElement) { 
                         mediaElement.addEventListener('loadeddata', function(e) {             
-                            mediaElement.play();  
+                            //mediaElement.play();  
                         }, false);                    
                     }
                 });   
@@ -31,7 +31,12 @@ app.run([ '$http', '$rootScope', '$sce',
         $rootScope.title = 'Podesk';
         $rootScope.audioUrl = $sce.trustAsResourceUrl('http://feeds.soundcloud.com/stream/153521892-radionavo-damien-maric-et-ses-invites-parlent-de-leurs-choix-les-invites-de-mon-invite-sont-mes-invites.mp3');
         $http.get("podcasts.json").success(function(response){
-            $rootScope.podcasts = response;
+            $rootScope.podcasts = response.list;
+            console.log($rootScope.podcasts);
+            $rootScope.listPodcast = []
+            angular.forEach(response.list, function(value, key) {
+               $rootScope.listPodcast[response.list[key].alias] = response.list[key].cover;
+             });
         }).error(function(){
 
         });
@@ -75,15 +80,18 @@ appControllers.controller('PodcastCtrl', ['$scope', '$http', '$sce','$rootScope'
         $scope.loader  = false;
         $scope.numLimit  = 5; 
 
-        $rootScope.title = $rootScope.podcasts[$routeParams.idPodcast].name+' - '+$rootScope.title;
-
-        $scope.nom = $rootScope.podcasts[$routeParams.idPodcast].name;
-        $scope.cover = $rootScope.podcasts[$routeParams.idPodcast].cover;
         $scope.feed = "podcasts/"+$routeParams.idPodcast+".json";
 
+        //keyyy = jQuery.inArray($routeParams.idPodcast, $.makeArray( $rootScope.podcasts))   ; 
+        // 
+        $scope.cover = $rootScope.listPodcast[$routeParams.idPodcast];
+        console.log($scope.cover); 
         $http.get($scope.feed).success(function(data){
 
+            $rootScope.title = data.channel.title+' - '+$rootScope.title;
+            $scope.nom = data.channel.title;
             $scope.description = data.channel.description;
+
             var podcast = data.channel.item;
             //console.log(data);
             angular.forEach(podcast, function(value, key) {

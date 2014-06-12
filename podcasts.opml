@@ -4,9 +4,19 @@
     <title>Pocket Casts Feeds</title>
   </head>
   <body>
-    <outline text="feeds">
+    <outline text="feeds">      
+      <outline type="rss" text="Donc Voilà Quoi podcast" xmlUrl="http://doncvoilaquoi.libsyn.com/rss" />
+      <outline type="rss" text="Season1" xmlUrl="http://feeds.feedburner.com/Season1Podcast" />
+      <outline type="rss" text="NPR: Pop Culture Happy Hour Podcast" xmlUrl="http://www.npr.org/rss/podcast.php?id=510282" />
+      <outline type="rss" text="Nerdist Writers Panel" xmlUrl="http://nerdistwriters.libsyn.com/rss" />
+      <outline type="rss" text="The /Filmcast" xmlUrl="http://feeds.feedburner.com/filmcast" />
+      <outline type="rss" text="Dan Gagnon gratuitement" xmlUrl="http://dangagnon.podomatic.com/rss2.xml" />
+      <outline type="rss" text="TVNR" xmlUrl="http://feeds.radiokawa.com/podcast_tvnr.xml" />
+      <outline type="rss" text="L'apéro du Captain" xmlUrl="http://feeds.feedburner.com/LaperoDuCaptain" />
+      <outline type="rss" text="New Yorker: Out Loud" xmlUrl="http://feeds.newyorker.com/services/rss/feeds/newyorker_outloud.xml" />
+      <outline type="rss" text="RadioNavo" xmlUrl="http://feeds.soundcloud.com/users/soundcloud:users:6464795/sounds.rss" />
+      <outline type="rss" text="Tom Rhodes Radio" xmlUrl="http://trr.libsyn.com/rss" />
       <outline type="rss" text="Studio404" xmlUrl="http://fibretigre.com/divers/Studio404_1.xml" />
-      
     </outline>
   </body>
 </opml>

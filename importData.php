@@ -17,9 +17,9 @@
 
 
 
+	$i = 0;
 
 	foreach($importPodcastsObj as $key => $podcast){
-
 
 		
 		$feed =  file_get_contents($podcast["xmlUrl"]);
@@ -27,35 +27,38 @@
 
 		$nom = former($feedObj -> channel -> title);
 
-		$obj[$nom] =  new stdClass();
+		// Alias du podcast
+		$podcastsFile['list'][$i] -> alias = (string) $nom;
 
-		/* Nom du podcast */	
-		$obj[$nom] -> name = (string) $feedObj -> channel -> title;
+		// Nom du podcast 
+		$podcastsFile['list'][$i] -> name = (string) $feedObj -> channel -> title;
 
-		/* Flux du podcast */	
-		$obj[$nom] -> feed = (string) $podcast["xmlUrl"];
+		// Flux du podcast 	
+		$podcastsFile['list'][$i] -> feed = (string) $podcast["xmlUrl"];
 
-		/* Creation de l'image cover du podcast */	
+		// Creation de l'image cover du podcast 	
 		$image = ($feedObj -> channel -> image -> url) ? $feedObj -> channel -> image -> url : $feedObj-> channel -> children('http://www.itunes.com/dtds/podcast-1.0.dtd')->image->attributes()->href;
 		$image = explode('?', $image);
 		$imageLocale = $nom.'.'.pathinfo($image[0] , PATHINFO_EXTENSION);		
 		file_put_contents('podcasts/'.$imageLocale, file_get_contents($image[0]));
 		
-		/* Cover du podcast */	
-		$obj[$nom] -> cover = $imageLocale;
-		/* Dernière publication */	
+		// Cover du podcast	
+		$podcastsFile['list'][$i] -> cover = $imageLocale;
 
-		$obj[$nom] -> lastPub = strtotime(($feedObj -> channel -> pubDate) ? $feedObj -> channel -> pubDate : $feedObj -> channel -> lastBuildDate);
+		// Dernière publication
+		$podcastsFile['list'][$i] -> lastPub = strtotime($feedObj -> channel -> item[0] -> pubDate);
 
-		/* Creation du JSON a partir du flux du podcast */	
+		// Creation du JSON a partir du flux du podcast
 		$feedObj = json_encode(new SimpleXMLElement($feedObj->asXML(), LIBXML_NOCDATA));			
 		file_put_contents('podcasts/'.$nom.'.json', $feedObj);
+		$i++;
 
 	}
+	//$podcastsFile['list'] = $podcastsList;
 
-	/* Création du JSON de la base de podcast */	
-	$obj = json_encode($obj);
-	file_put_contents('podcasts.json', $obj);
+	// Création du JSON de la base de podcast
+	$podcastsFile = json_encode($podcastsFile);
+	file_put_contents('podcasts.json', $podcastsFile);
 
 
 	
