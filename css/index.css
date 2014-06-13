@@ -303,6 +303,12 @@ a:hover {
         height: 1px;
         margin: 10px 0;
         display: block; }
+    .podcast .container .episodes .btn {
+      display: block;
+      width: 200px;
+      margin: 0 auto 20px; }
+      .podcast .container .episodes .btn:hover {
+        background: #FFF; }
 
 input.text {
   display: block;
@@ -329,7 +335,7 @@ input.text {
   input.text:focus {
     border: 1px solid #11a7ab; }
 
-input.submit, .btn {
+input.submit {
   display: inline-block;
   padding: 0 15px;
   height: 50px;
@@ -351,10 +357,6 @@ input.submit, .btn {
   border: #8c6224 1px solid;
   float: right;
   text-decoration: none; }
-
-.btn {
-  background-color: #11a7ab;
-  float: left; }
 
 .back {
   display: block;

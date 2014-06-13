@@ -238,6 +238,15 @@ a:hover{
                     display: block;
                 }         
             }
+
+            .btn{
+                display: block;
+                width: 200px;
+                margin: 0 auto 20px;  
+                &:hover{
+                    background:#FFF;
+                }
+            }
         }
             
        
@@ -264,7 +273,7 @@ input.text{
         border: 1px solid #11a7ab;
     }
 }
-input.submit, .btn{
+input.submit{
     display: inline-block;
     padding: 0 15px;
     height: 50px; line-height: 50px;
@@ -277,10 +286,6 @@ input.submit, .btn{
     border: darken(#cf9847,20%) 1px solid;
     float: right;
     text-decoration: none;
-}
-.btn{
-    background-color: #11a7ab;
-    float: left;
 }
 .back{
     display: block;
