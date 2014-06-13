@@ -10,6 +10,7 @@
 	   	$chaine = strtolower($chaine);
 	   	return utf8_encode($chaine); 
 	}
+
 	$importPodcasts = file_get_contents('podcasts.opml');
 	$importPodcastsObj = simplexml_load_string($importPodcasts);
 
@@ -22,7 +23,14 @@
 	foreach($importPodcastsObj as $key => $podcast){
 
 		
-		$feed =  file_get_contents($podcast["xmlUrl"]);
+		for ($try=1; $try<=3; $try++) {
+			$feed =  file_get_contents($podcast["xmlUrl"]);
+			if ($feed) {
+			    break;
+			}
+			sleep(2);
+		}
+
 		$feedObj = simplexml_load_string($feed);
 
 		$nom = former($feedObj -> channel -> title);
@@ -38,12 +46,26 @@
 
 		// Creation de l'image cover du podcast 	
 		$image = ($feedObj -> channel -> image -> url) ? $feedObj -> channel -> image -> url : $feedObj-> channel -> children('http://www.itunes.com/dtds/podcast-1.0.dtd')->image->attributes()->href;
+
 		$image = explode('?', $image);
-		$imageLocale = $nom.'.'.pathinfo($image[0] , PATHINFO_EXTENSION);		
-		file_put_contents('podcasts/'.$imageLocale, file_get_contents($image[0]));
+
+		$imageLocale = $nom.'.'.pathinfo($image[0] , PATHINFO_EXTENSION);	
+
+		for ($try=1; $try<=3; $try++) {
+			$cover = file_get_contents($image[0]);
+			if ($feed) {
+			    break;
+			}
+			sleep(2);
+		}
+
+		file_put_contents('podcasts/'.$imageLocale, $cover);
 		
 		// Cover du podcast	
-		$podcastsFile['list'][$i] -> cover = $imageLocale;
+		$podcastsFile['list'][$i] -> cover = $imageLocale;	
+
+		// Description du podcast	
+		$podcastsFile['list'][$i] -> description = (string) $feedObj -> channel -> description;
 
 		// Dernière publication
 		$podcastsFile['list'][$i] -> lastPub = strtotime($feedObj -> channel -> item[0] -> pubDate);
@@ -51,6 +73,7 @@
 		// Creation du JSON a partir du flux du podcast
 		$feedObj = json_encode(new SimpleXMLElement($feedObj->asXML(), LIBXML_NOCDATA));			
 		file_put_contents('podcasts/'.$nom.'.json', $feedObj);
+		
 		$i++;
 
 	}

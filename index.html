@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="mediaelement/mediaelementplayer.min.css" />
@@ -21,6 +22,7 @@
         </header>
         <div class="player">
             <div class="container">
+                <p>{{audioNom}}</p>
                 <audio src='{{audioUrl}}' id="audioplayer" ng-audio controls ></audio>
             </div>
         </div>

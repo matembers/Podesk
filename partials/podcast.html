@@ -1,22 +1,25 @@
-<section>
+﻿<section>
 
     <div class="loader" ng-show="loader"></div>
 
     <section
         class="pan pan-padding podcast">
             <div class="container">
-                <h1>{{nom}}</h1>
-                <p ng-bind-html="description">
-                    
-                </p>
-                <img src="podcasts/{{cover}}" class="pull-left" />
-                <div class="episodes">
-                    <div class="row" ng-repeat="episode in episodes | orderBy:'-dateTs' | limitTo : numLimit"  id="podcast{{$index}}">
-                        <h3>{{episode.title}}</h3>
+                
+                <div class="col-sm-3 infos">
+                    <img src="podcasts/{{cover}}" />
+
+                    <h1 class="h3">{{nom}}</h1>
+                    <p ng-bind-html="description"></p>
+                </div>
+                <div class="col-sm-9 episodes">
+                    <div class="wrapper" ng-repeat="episode in episodes | orderBy:'-dateTs' | limitTo : numLimit"  id="podcast{{$index}}">
+                        <a href='' ng-click="playPod(episode,$event)" class="play pull-right"><span class="glyphicon glyphicon-play"></span></a>
+                        <h4>{{episode.title}}</h4>
                         <p>{{episode.dateFr}}</p>
+                        <span class="hr"></span>
                         <div ng-bind-html="episode.description"></div>
                         <p>
-                            <a href='' ng-click="playPod(episode)">Play</a>
                         </p>
                         <!-- <audio src='{{episode.url}}'  controls ></audio> -->
                     

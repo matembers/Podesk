@@ -18,63 +18,30 @@ input, textarea{ border: none; -webkit-appearance: none; @include border-radius(
 body{    
     color: #333;
     font-family: Arial;
-    font-size: 16px;
+    font-size: 14px;
     background-color: #FFFFFF;
+    font-family: "Open Sans", "Helvetica Neue";
+    background-color: #f2f2f2;
 }
 i{display: inline-block;}
-h1{  }
-h3{ margin: 0; }
+h1, .h1{  
+}
+h3, .h3{
+    font-weight: 600;  
+}
+h4, .h4{
+    font-weight: 600;  
+    margin: 0;
+}
 
-.mejs-container .mejs-controls .mejs-button button:focus {
-    outline: 0 none !important;
+a{
+    color: #cf9847;
 }
-.mejs-container .mejs-controls .mejs-time-rail .mejs-time-loaded{
-    background: #444;
+a:hover{
+    color: #e7aa50;
 }
 
-input.text{
-    display: block;
-    width: 100%;
-    height: 48px;
-    border: 1px solid #CCC;
-    background-color: #FFF;
-    color: #333;
-    font-size: 16px;
-    padding-left: 10px;
-    outline:none;
-    @include border-radius(4px);
-    @include background-clip(padding-box);
-    @include transition-duration;
-    &:focus{
-        border: 1px solid #11a7ab;
-    }
-}
-input.submit, .btn{
-    display: inline-block;
-    padding: 0 15px;
-    height: 50px; line-height: 50px;
-    border: none;
-    text-transform: uppercase; text-align: center;
-    font-size: 16px; color: #fff;
-    @include border-radius(4px);
-    @include background-clip(padding-box);
-    background-color: #cf9847;
-    border: darken(#cf9847,20%) 1px solid;
-    float: right;
-    text-decoration: none;
-}
-.btn{
-    background-color: #11a7ab;
-    float: left;
-}
-.back{
-    display: block;
-    position: absolute;
-    top: -60px; left: 0;
-    background:url(img/back.png) center center no-repeat;
-    z-index: 10;
-    width: 60px; height: 60px;
-}
+
 .loader{
     @extend .pan;
     background:url(img/loader.gif) center center no-repeat rgba(57, 66, 100, 0.6);
@@ -92,24 +59,64 @@ input.submit, .btn{
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
-    background-color: #d09946;
+    background-color: #191c1f;
     
 }
 .player{
     position: absolute;
     top: 40px; left: 0; right: 0;
-    height: 60px; line-height: 60px;
+    height: 80px;
     padding: 15px 0;
     color: #FFF;
-    text-transform: uppercase;
-    text-align: center;
-    background-color: #DDD;
+    background-color: #282d31;
     
+    p{
+       margin: 0; 
+    }
+    .mejs-container{
+        background: none;
+
+        .mejs-controls{
+            background: none;
+        }
+    }
+    .mejs-controls{
+        .mejs-button button:focus {
+            outline: 0 none !important;
+        }
+        .mejs-time-rail{
+            span{
+            }
+            .mejs-time-loaded{
+                background: rgba(255,255,255,0.1);
+                 @include border-radius(12px);
+            }
+            .mejs-time-total{
+                background: rgba(255,255,255,0.2);
+                 @include border-radius(12px);
+            }
+            .mejs-time-current{
+                background: #e7aa50;
+                 @include border-radius(12px);
+            }
+        }
+        .mejs-horizontal-volume-slider{
+            .mejs-horizontal-volume-total{
+                background: rgba(255,255,255,0.3);
+                 @include border-radius(10px);
+            }
+            .mejs-horizontal-volume-current{
+                background: rgba(255,255,255,1.0); 
+                 @include border-radius(10px);   
+            }
+        }
+    }
 }
+
 
 .view{
     position: absolute;
-    top: 100px; right: 0; bottom: 0; left: 0;
+    top: 120px; right: 0; bottom: 0; left: 0;
 }
 /*
 .nav{
@@ -161,14 +168,6 @@ input.submit, .btn{
     text-align: center;
     font-weight: bold;
 }
-.row{
-    overflow: hidden;
-    border-bottom: 1px solid #EEE ;
-    margin: 1px 0;
-    padding: 10px 0;
-    position: relative;
-    
-}
 .row_active{
     margin: 0;
     height: 133px;
@@ -187,32 +186,107 @@ input.submit, .btn{
 
 
 .podcasts{
+    .container{
+        padding-top: 20px;
+        padding-bottom: 20px;
 
-    .wrapper{
-        margin-bottom: 10px;
-        a{
-            color: #333;
-        }
-        img{
-           min-width: 100%;
-           max-width: 100%;
-           margin: 0 0 3px 0;
+        .wrapper{
+            margin-bottom: 20px;
+            a{
+                color: #333;
+            }
+            img{
+               min-width: 100%;
+               max-width: 100%;
+               margin: 0 0 3px 0;
+            }
         }
     }
 
 }
 
 .podcast{
+    .container{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        .infos{
+            img{    
+                display: block;    
+                min-width: 100%;
+                max-width: 100%;
+            } 
+        }
+         
+        .episodes{
+            overflow: hidden;
 
-    img{
-        width: 150px;
-        margin: 0 15px 0 0;
-    } 
-    .episodes{
-        overflow: hidden;
+            .wrapper{
+                overflow: hidden;
+                margin:  0 0 20px;
+                padding: 15px 20px;
+                background: #FFF;
+                position: relative;   
+                @include border-radius(5px);   
+                .play{
+                    font-size: 27px;
+
+                }
+                .hr{
+                    background: #DDD;
+                    height:1px;
+                    margin: 10px 0;
+                    display: block;
+                }         
+            }
+        }
+            
+       
     }
 
-    .row{
-        padding: 20px 0;
+}
+
+
+
+input.text{
+    display: block;
+    width: 100%;
+    height: 48px;
+    border: 1px solid #CCC;
+    background-color: #FFF;
+    color: #333;
+    font-size: 16px;
+    padding-left: 10px;
+    outline:none;
+    @include border-radius(4px);
+    @include background-clip(padding-box);
+    @include transition-duration;
+    &:focus{
+        border: 1px solid #11a7ab;
     }
+}
+input.submit, .btn{
+    display: inline-block;
+    padding: 0 15px;
+    height: 50px; line-height: 50px;
+    border: none;
+    text-transform: uppercase; text-align: center;
+    font-size: 16px; color: #fff;
+    @include border-radius(4px);
+    @include background-clip(padding-box);
+    background-color: #cf9847;
+    border: darken(#cf9847,20%) 1px solid;
+    float: right;
+    text-decoration: none;
+}
+.btn{
+    background-color: #11a7ab;
+    float: left;
+}
+.back{
+    display: block;
+    position: absolute;
+    top: -60px; left: 0;
+    background:url(img/back.png) center center no-repeat;
+    z-index: 10;
+    width: 60px; height: 60px;
 }
