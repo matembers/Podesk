@@ -11,12 +11,13 @@
 
                     <h1 class="h3">{{nom}}</h1>
                     <p ng-bind-html="description"></p>
+                    <a href="{{feed}}" target='_blank'>Flux RSS</a>
                 </div>
                 <div class="col-sm-9 episodes">
-                    <div class="wrapper" ng-repeat="episode in episodes | orderBy:'-dateTs' | limitTo : numLimit"  id="podcast{{$index}}">
+                    <div class="wrapper" ng-repeat="episode in episodes | orderBy:'-pubDate' | limitTo : numLimit"  id="podcast{{$index}}">
                         <a href='' ng-click="playPod(episode,$event)" class="play pull-right"><span class="glyphicon glyphicon-play"></span></a>
                         <h4>{{episode.title}}</h4>
-                        <p>{{episode.dateFr}}</p>
+                        <p>{{episode.pubDateFR}}</p>
                         <span class="hr"></span>
                         <div ng-bind-html="episode.description"></div>
                         <p>

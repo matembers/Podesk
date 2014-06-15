@@ -1,4 +1,6 @@
 ﻿<?php 
+	setlocale(LC_ALL, 'fr_FR.utf8','fra');
+
 	function former($chaine){
 		$chaine = utf8_decode($chaine); 
 	    $toReplace="!.°ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ '\"\\/#\|\"()";
@@ -20,6 +22,7 @@
 
 	$i = 0;
 
+
 	foreach($importPodcastsObj as $key => $podcast){
 
 		
@@ -34,6 +37,8 @@
 		$feedObj = simplexml_load_string($feed);
 
 		$nom = former($feedObj -> channel -> title);
+
+		$podcastsFile['list'][$i] = new stdClass();
 
 		// Alias du podcast
 		$podcastsFile['list'][$i] -> alias = (string) $nom;
@@ -67,17 +72,53 @@
 		// Description du podcast	
 		$podcastsFile['list'][$i] -> description = (string) $feedObj -> channel -> description;
 
+		$episodeList = $feedObj -> channel -> item;
+
+		$j = 0;
+
+
+		foreach ($episodeList as $key => $episode) {
+			$podcastFile[$i]['episodes'][$j] = new stdClass();
+
+			// Nom de l'episode 
+			$podcastFile[$i]['episodes'][$j] -> title = (string) $episode -> title;
+
+			// Date de l'episode 
+			$podcastFile[$i]['episodes'][$j] -> pubDate = (int) strtotime($episode -> pubDate);
+
+			// Date FR de l'episode 
+			$podcastFile[$i]['episodes'][$j] -> pubDateFR = (string) utf8_encode(ucwords(strftime('%d %B %Y',$podcastFile[$i]['episodes'][$j] -> pubDate))) ;
+
+			// Description du podcast
+			$description = ($episode -> children('http://www.itunes.com/dtds/podcast-1.0.dtd') -> summary) ? nl2br($episode -> children('http://www.itunes.com/dtds/podcast-1.0.dtd') -> summary) : $episode -> description;
+			$podcastFile[$i]['episodes'][$j] -> description = (string) trim($description);
+
+			// Lien du podcast	
+			$podcastFile[$i]['episodes'][$j] -> link = (string) $episode -> link;
+
+			// URL du podcast	
+			$podcastFile[$i]['episodes'][$j] -> url = (string) $episode -> enclosure['url'];
+
+			// Durée du podcast	
+			$podcastFile[$i]['episodes'][$j] -> duration = (string) $episode -> children('http://www.itunes.com/dtds/podcast-1.0.dtd') -> duration;
+
+			$j++;
+		}
+		usort($podcastFile[$i]['episodes'], function($a, $b){
+			if($a->pubDate == $b->pubDate){ return 0 ; }
+			return ($a->pubDate > $b->pubDate) ? -1 : 1;
+		});
+
 		// Dernière publication
-		$podcastsFile['list'][$i] -> lastPub = strtotime($feedObj -> channel -> item[0] -> pubDate);
+		$podcastsFile['list'][$i] -> lastPub = $podcastFile[$i]['episodes'][0] -> pubDate;
 
 		// Creation du JSON a partir du flux du podcast
-		$feedObj = json_encode(new SimpleXMLElement($feedObj->asXML(), LIBXML_NOCDATA));			
-		file_put_contents('podcasts/'.$nom.'.json', $feedObj);
+		$podcastFile[$i] = json_encode($podcastFile[$i]);	
+		file_put_contents('podcasts/'.$nom.'.json', $podcastFile[$i]);
 		
 		$i++;
 
 	}
-	//$podcastsFile['list'] = $podcastsList;
 
 	// Création du JSON de la base de podcast
 	$podcastsFile = json_encode($podcastsFile);

@@ -40,6 +40,7 @@ app.run([ '$http', '$rootScope', '$sce',
                 $rootScope.listPodcast2 = [];
                 $rootScope.listPodcast2['name'] = response.list[key].name;
                 $rootScope.listPodcast2['cover'] = response.list[key].cover;
+                $rootScope.listPodcast2['feed'] = response.list[key].feed;
                 $rootScope.listPodcast2['description'] = response.list[key].description;
                $rootScope.listPodcast[response.list[key].alias] = $rootScope.listPodcast2;
             });
@@ -89,26 +90,20 @@ appControllers.controller('PodcastCtrl', ['$scope', '$http', '$sce','$rootScope'
 
         $rootScope.title = $rootScope.listPodcast[$routeParams.idPodcast].name+' - '+$rootScope.title;
 
-        $scope.feed = "podcasts/"+$routeParams.idPodcast+".json";
+        $scope.json = "podcasts/"+$routeParams.idPodcast+".json";
 
          
         $scope.cover = $rootScope.listPodcast[$routeParams.idPodcast].cover;
         $scope.nom = $rootScope.listPodcast[$routeParams.idPodcast].name;
+        $scope.feed = $rootScope.listPodcast[$routeParams.idPodcast].feed;
         $scope.description = $rootScope.listPodcast[$routeParams.idPodcast].description;
 
         console.log( $rootScope.listPodcast); 
 
-        $http.get($scope.feed).success(function(data){
-
-
-            var podcast = data.channel.item;
-            //console.log(data);
+        $http.get($scope.json).success(function(data){
+            var podcast = data.episodes;
             angular.forEach(podcast, function(value, key) {
-               podcast[key].url = $sce.trustAsResourceUrl(podcast[key].enclosure["@attributes"].url);
-                date = new Date(podcast[key].pubDate);
-               podcast[key].dateTs = date.getTime();
-                dateString = ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth()+1)).slice(-2) + '/' + date.getFullYear();
-               podcast[key].dateFr = dateString;
+               podcast[key].url = $sce.trustAsResourceUrl(podcast[key].url);
              });
             $scope.episodes = podcast;
             //console.log($scope.episodes);
