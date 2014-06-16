@@ -303,6 +303,8 @@ a:hover {
         height: 1px;
         margin: 10px 0;
         display: block; }
+    .podcast .container .episodes .read h4 {
+      color: #666; }
     .podcast .container .episodes .btn {
       display: block;
       width: 200px;

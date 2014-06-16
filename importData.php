@@ -102,6 +102,8 @@
 			// Durée du podcast	
 			$podcastFile[$i]['episodes'][$j] -> duration = (string) $episode -> children('http://www.itunes.com/dtds/podcast-1.0.dtd') -> duration;
 
+			$podcastFile[$i]['episodes'][$j] -> read = (boolean) true;
+
 			$j++;
 		}
 		usort($podcastFile[$i]['episodes'], function($a, $b){
